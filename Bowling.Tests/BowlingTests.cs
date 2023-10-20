@@ -88,6 +88,9 @@ namespace Bowling.Tests
         [InlineData("-- -- -- -- -- -- -- -- -- XX1", 21)]
         [InlineData("-- -- -- -- -- -- -- -- -- XX5", 25)]
         [InlineData("-- -- -- -- -- -- -- -- -- XXX", 30)]
+        [InlineData("-- -- -- -- -- -- -- -- 2/ -5", 15)]
+        [InlineData("-- -- -- -- -- -- -- -- 2/ 5/5", 30)]
+        [InlineData("-- -- -- -- -- -- -- -- 2/ 45", 23)]
         public void TestEnd(string inp, int result)
         {
             b.CalculateScore(inp).Should().Be(result);
@@ -95,7 +98,7 @@ namespace Bowling.Tests
 
         //ChatGPT suggested test cases, verified by https://www.bowlinggenius.com/
         [Theory()]
-        [InlineData("X X X X X X X X X -1", 242)]
+        [InlineData("X X X X X X X X X -1", 242)] // this is a problem
         [InlineData("-- X 5/ -- X 5/ -- X 5/ --", 90)]
         [InlineData("-- -- -- -- -- -- -- -- -- X5/", 20)]
         [InlineData("-- -- -- -- -- -- -- -- -- 5/X", 20)]
