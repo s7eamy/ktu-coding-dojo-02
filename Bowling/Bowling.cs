@@ -4,72 +4,33 @@
     {
         public int CalculateScore(string inp)
         {
-            string results = inp.Replace(" ", "").Replace("-", "0");
+            string results = inp.Replace(" ", "").Replace("-", "0"); // formatting the frames
 
             int score = 0;
-            for (int i = 0; i < results.Length; i++)
+            int len = results.Length;
+            for (int i = 0; i < len; i++)
             {
                 // Strike
-                if (results[i] == 'X' && i < 10)
+                if (results[i] == 'X')
                 {
                     score += 10;
                     score += ParseScore(results, i + 1);
                     score += ParseScore(results, i + 2);
+                    if (i + 3 >= len) break; // if last frame
                 }
+                // Spare
                 else if (results[i] == '/')
                 {
                     // sum up self
                     score += 10 - ParseScore(results, i - 1);
                     // add next
                     score += ParseScore(results, i + 1);
+                    if (i + 2 >= len) break; // if last frame
                 }
                 else
                 {
                     score += ParseScore(results, i);
                 }
-
-
-                //    if (segment[0] == 'X')
-                //    {
-                //        strike++;
-                //        continue;
-                //    } else if(strike > 0)
-                //    {
-                //        score += strike * 10;
-                //        strike = 0;
-                //    }
-
-                //    if (segment[0] == '-')
-                //    {
-                //        firstSegment = 0;
-                //    } else
-                //    {
-                //        firstSegment = int.Parse(segment[0].ToString());
-                //    }
-                //    if (spare)
-                //    {
-                //        score += firstSegment;
-                //        spare = false;
-                //    }
-                //    if (segment[1] == '-')
-                //    {
-                //        secondSegment = 0;
-                //    }
-                //    else if (segment[1] == '/')
-                //    {
-                //        spare = true;
-                //        score += 10;
-                //        continue;
-                //    }
-                //    else
-                //    {
-                //        secondSegment = int.Parse(segment[1].ToString());
-                //    }
-
-
-
-
-                //    score += firstSegment + secondSegment;
             }
 
             return score;
